@@ -20,7 +20,6 @@ public class ReadFile {
         Scanner scan = new Scanner(file);
 
         int source = scan.nextInt();
-        scan.nextLine();
 
         String typeGraph = scan.next();
 
@@ -28,18 +27,15 @@ public class ReadFile {
             scan.nextLine();
             int vertexAmount = scan.nextInt();
 
-            for(int i = source; i <= vertexAmount; i++){
+            for(int i = 0; i <= vertexAmount - 1; i++){
                 arrVertex.add(new Vertex(i));
             }
-
-            scan.nextLine();
-            scan.nextLine();
 
             while(scan.hasNext()){
                 scanSame = scan.nextInt();
                 sameVertex = new Vertex(scanSame);
 
-                for(int i = source; i <= vertexAmount; i++){
+                for(int i = 0; i <= arrVertex.size() - 1; i++){
                     if(arrVertex.get(i).getVertex() == scanSame){
                         scanTarget = scan.nextInt();
                         targetVertex = new Vertex(scanTarget);
@@ -49,14 +45,8 @@ public class ReadFile {
                 }
             }
 
-            for(int i = source; i <= vertexAmount; i++){
-                sameVertex = new Vertex(arrVertex.get(i).getVertex());
-                dijkstra.getPath(sameVertex);
-
-                for(int j = source; j <= vertexAmount; j++) {
-                    targetVertex = new Vertex(arrVertex.get(j).getVertex());
-                    System.out.println(dijkstra.getShortestPathTo(targetVertex));
-                }
+            for(Vertex v : dijkstra.getPath(arrVertex.get(source))) {
+                System.out.println(v.getMinDistance());
             }
         }
 

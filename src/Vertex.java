@@ -3,7 +3,7 @@ import java.util.*;
 public class Vertex implements Comparable<Vertex> {
     private int vertex;
     private boolean visited;
-    private double minDistance = Double.MAX_VALUE;
+    private double minDistance = Double.POSITIVE_INFINITY;
     private List<Edge> edges;
     private Vertex lastVertex;
 
