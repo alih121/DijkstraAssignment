@@ -3,56 +3,40 @@ import java.util.*;
 
 public class ReadFile {
     public static void main(String args[]) throws IOException{
-        Dijkstra dijkstra = new Dijkstra();
         String filename = "graph";
         WriteFile writeFile = new WriteFile();
         writeFile.Write(filename);
 
-        int scanSame;
-        int scanTarget;
-        Vertex sameVertex;
-        Vertex targetVertex;
-        double weight;
-
         File file = new File(filename + ".txt");
 
-        List<Vertex> arrVertex = new ArrayList<>();
+        ArrayList<ArrayList<Vertex.VertexList> > arrVertex = new ArrayList<>();
         Scanner scan = new Scanner(file);
 
         int source = scan.nextInt();
-
+        //System.out.println(source);
         String typeGraph = scan.next();
 
         if(typeGraph.equals("A")){
-            scan.nextLine();
             int vertexAmount = scan.nextInt();
-
-            for(int i = 0; i <= vertexAmount - 1; i++){
-                arrVertex.add(new Vertex(i));
+            //System.out.println(vertexAmount);
+            for(int i = 0; i < vertexAmount; i++){
+                arrVertex.add(new ArrayList<>());
             }
 
             while(scan.hasNext()){
-                scanSame = scan.nextInt();
-                sameVertex = new Vertex(scanSame);
-
-                for(int i = 0; i <= arrVertex.size() - 1; i++){
-                    if(arrVertex.get(i).getVertex() == scanSame){
-                        scanTarget = scan.nextInt();
-                        targetVertex = new Vertex(scanTarget);
-                        weight = scan.nextInt();
-                        arrVertex.get(i).addNeighbour(new Edge(weight, sameVertex, targetVertex));
-                    }
-                }
+                int from = scan.nextInt();
+                //System.out.println(from);
+                int target = scan.nextInt();
+                //System.out.println(target);
+                int weight = scan.nextInt();
+                //System.out.println(weight);
+                //System.out.println();
+                arrVertex.get(from).add(new Vertex.VertexList(target, weight));
             }
 
-            for(Vertex v : dijkstra.getPath(arrVertex.get(source))) {
-                System.out.println(v.getMinDistance());
-            }
+            Dijkstra.dijkstra(vertexAmount, arrVertex, source);
+        }else{
+            System.out.println("No type of file!");
         }
-
-//        for (int i = 0; i < arrVertex.size();i++)
-//        {
-//            System.out.println(arrVertex.get(i).getVertex());
-//        }
     }
 }

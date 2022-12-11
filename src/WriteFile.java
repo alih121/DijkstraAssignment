@@ -30,7 +30,14 @@ public class WriteFile {
 
         try{
             for(int i = source; i < vertex; i++){
-                from = i;
+                from = random.nextInt(vertex - source) + source;
+                //text += from + "\t";
+
+                do{
+                    if(from != source && i == source){
+                        from = random.nextInt(vertex - source) + source;
+                    }
+                }while(from != source && i == source);
                 text += from + "\t";
 
                 to = random.nextInt(vertex - source) + source;
@@ -39,7 +46,6 @@ public class WriteFile {
                 weight = random.nextInt(vertex - source) + source;
                 text += weight + "\n";
             }
-
             Files.write(target, text.getBytes());
         }
         catch(IOException e){
