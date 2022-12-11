@@ -3,9 +3,19 @@ import java.util.*;
 
 public class ReadFile {
     public static void main(String args[]) throws IOException{
-        String filename = "graph";
-        WriteFile writeFile = new WriteFile();
-        writeFile.Write(filename);
+        Scanner scanInput = new Scanner(System.in);
+        String filename = "";
+
+        System.out.print("Would you like to create a graph or use the set one? (1 to create | 2 to use set graph): ");
+        int input = scanInput.nextInt();
+
+        if(input == 1){
+            filename = "graph";
+            WriteFile writeFile = new WriteFile();
+            writeFile.Write(filename);
+        }else if(input == 2){
+            filename = "graph2";
+        }
 
         File file = new File(filename + ".txt");
 
